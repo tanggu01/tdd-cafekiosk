@@ -1,11 +1,11 @@
-package sample.cafekiosk.spring.api.domain.product;
+package sample.cafekiosk.spring.domain.product;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import sample.cafekiosk.spring.api.domain.BaseEntity;
+import sample.cafekiosk.spring.domain.BaseEntity;
 
 @Entity
 @Getter

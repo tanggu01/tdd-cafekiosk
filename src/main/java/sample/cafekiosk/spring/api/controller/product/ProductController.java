@@ -3,7 +3,7 @@ package sample.cafekiosk.spring.api.controller.product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sample.cafekiosk.spring.api.domain.product.response.ProductResponse;
+import sample.cafekiosk.spring.domain.product.response.ProductResponse;
 import sample.cafekiosk.spring.api.service.product.ProductService;
 
 import java.util.List;
