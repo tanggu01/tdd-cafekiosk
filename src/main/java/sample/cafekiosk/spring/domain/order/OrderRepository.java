@@ -1,8 +1,7 @@
-package sample.cafekiosk.spring.api.service.order;
+package sample.cafekiosk.spring.domain.order;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import sample.cafekiosk.spring.domain.order.Order;
 
 
 @Repository
