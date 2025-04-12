@@ -65,6 +65,28 @@ class OrderTest { // Order 객체에 대한 단위테스트
         assertThat(order.getRegisteredDateTime()).isEqualTo(registeredDateTime);
     }
 
+    @Test
+    @DisplayName("주문 생성 시 주문상품 (OrderProduct)가 생성되어야 한다.") //TODO OrderProduct 단위테스트 추가해보기! done
+    void createOrderProduct() {
+        // given
+        LocalDateTime registeredDateTime = LocalDateTime.now();
+        Product product1 = createProduct("001", 1000);
+        Product product2 = createProduct("002", 2000);
+        List<Product> products = List.of(product1, product2);
+
+        // when
+        Order order = Order.create(products, registeredDateTime);
+
+        // then
+        assertThat(order.getOrderProducts()).hasSize(2);
+        assertThat(order.getOrderProducts())
+                .extracting("order", "product")
+                .containsExactlyInAnyOrder(
+                        tuple(order, product1),
+                        tuple(order, product2)
+                );
+    }
+
 
     private Product createProduct(String productNumber, int price) {
         return Product.builder()
