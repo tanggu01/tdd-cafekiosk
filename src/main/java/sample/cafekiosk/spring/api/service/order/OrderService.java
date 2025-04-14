@@ -33,7 +33,7 @@ public class OrderService {
     private List<Product> findProductsBy(List<String> productNumbers) {
         List<Product> products = productRepository.findAllByProductNumberIn(productNumbers);
         Map<String, Product> productMap = products.stream()
-                .collect(Collectors.toMap(Product::getProductNumber, p -> p));
+                . collect(Collectors.toMap(Product::getProductNumber, p -> p));
 
         return productNumbers.stream()
                 .map(productMap::get)
