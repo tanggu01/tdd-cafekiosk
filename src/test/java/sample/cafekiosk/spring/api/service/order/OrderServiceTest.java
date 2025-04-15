@@ -28,7 +28,7 @@ import static sample.cafekiosk.spring.domain.product.ProductType.*;
 
 @ActiveProfiles("test")
 @SpringBootTest
-@Transactional
+//@Transactional // rollback 기능으로 AfterEach가 없어도 돼서 편리하긴 하지만 service단에 붙이지 않아도 테스트가 통과하기에 리스크가 있다. JpaRepository로 직접 하는건 메서드에 @Transactional이 달려있어서 서비스에 @Transactional을 안달아도 잘 동작하지만 변경감지는 작동하지 않는다.
 class OrderServiceTest {
 
     @Autowired
@@ -43,12 +43,12 @@ class OrderServiceTest {
     @Autowired
     private StockRepository stockRepository;
 
-//    @AfterEach
-//    void tearDown() {
-//        orderProductRepository.deleteAllInBatch();
-//        productRepository.deleteAllInBatch();
-//        orderRepository.deleteAllInBatch();
-//    }
+    @AfterEach
+    void tearDown() {
+        orderProductRepository.deleteAllInBatch();
+        productRepository.deleteAllInBatch();
+        orderRepository.deleteAllInBatch();
+    }
 
     @Test
     @DisplayName("주문번호 리스트를 받아 주문을 생성한다.")

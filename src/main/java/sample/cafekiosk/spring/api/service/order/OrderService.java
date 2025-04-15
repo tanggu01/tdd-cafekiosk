@@ -1,5 +1,6 @@
 package sample.cafekiosk.spring.api.service.order;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import sample.cafekiosk.spring.api.controller.order.request.order.OrderCreateRequest;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class OrderService {
 
     private final ProductRepository productRepository;
