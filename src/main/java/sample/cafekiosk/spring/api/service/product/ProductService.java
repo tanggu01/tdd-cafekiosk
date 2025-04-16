@@ -20,16 +20,14 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
+    // 동시성 이슈
     public ProductResponse createProduct(ProductCreateRequest request) {
-        String latestProductNumber = productRepository.findLatestProductNumber();
+        String nextProductNumber = createNextProductNumber();
 
-        return ProductResponse.builder()
-                .productNumber("002")
-                .type(ProductType.HANDMADE)
-                .sellingStatus(SELLING)
-                .name("카푸치노")
-                .price(5000)
-                .build();
+        Product product = request.toEntity(nextProductNumber);
+        Product savedProduct = productRepository.save(product);
+
+        return ProductResponse.of(savedProduct);
     }
 
     public List<ProductResponse> getSellingProducts() {
@@ -37,5 +35,17 @@ public class ProductService {
         return products.stream()
                 .map(ProductResponse::of)
                 .collect(Collectors.toList());
+    }
+
+    private String createNextProductNumber() {
+        String latestProductNumber = productRepository.findLatestProductNumber();
+        if (latestProductNumber == null) {
+            return "001";
+        }
+        int latestProductNumberInt = Integer.parseInt(latestProductNumber);
+        int nextProductNumberInt = latestProductNumberInt + 1;
+
+        return String.format("%03d", nextProductNumberInt); // 9 -> 009, 10 -> 010
+
     }
 }
