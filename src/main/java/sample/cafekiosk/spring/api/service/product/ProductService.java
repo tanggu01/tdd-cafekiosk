@@ -22,7 +22,14 @@ public class ProductService {
 
     public ProductResponse createProduct(ProductCreateRequest request) {
         String latestProductNumber = productRepository.findLatestProductNumber();
-        return null;
+
+        return ProductResponse.builder()
+                .productNumber("002")
+                .type(ProductType.HANDMADE)
+                .sellingStatus(SELLING)
+                .name("카푸치노")
+                .price(5000)
+                .build();
     }
 
     public List<ProductResponse> getSellingProducts() {
